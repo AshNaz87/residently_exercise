@@ -1,2 +1,1 @@
-# residently_exercise
-# residently_exercise
+Junior Web Developer role challenge
