@@ -1,15 +1,3 @@
-def address(hash)
-  if hash["subpremise"] == nil && hash["house_name"] == nil
-    puts "#{hash["house_number"]} #{hash["street_line_1"]}, \n#{hash["town_or_city"]}, \n#{hash["region"]}, \n#{hash["postcode"]}"
-  elsif hash["house_name"] == nil
-    puts "#{hash["house_number"]} #{hash["street_line_1"]}, \n#{hash["town_or_city"]}, \n#{hash["postcode"]}"
-  elsif hash["subpremise"] == nil
-    puts "#{hash["house_name"]}, \n#{hash["street_line_1"]}, \n#{hash["town_or_city"]}, \n#{hash["postcode"]}"
-  else
-    puts "#{hash["subpremise"]}, #{hash["house_name"]}, \n#{hash["house_number"]} #{hash["street_line_1"]}, \n#{hash["town_or_city"]}, \n#{hash["postcode"]}"
-  end
-end
-
 
 place_1 = {
   "subpremise" => "Apt 6",
@@ -33,7 +21,6 @@ place_2 = {
   "postcode" => "M1 1ER"
 }
 
-
 place_3 = {
   "subpremise" => nil,
   "house_number" => "81",
@@ -44,7 +31,6 @@ place_3 = {
   "region" => "Manchester",
   "postcode" => "M20 1HR"
 }
-
 
 place_4 = {
   "subpremise" => nil,
@@ -57,8 +43,22 @@ place_4 = {
   "postcode" => "M33 6HL"
 }
 
+def address(hash)
+  case
+  when hash["subpremise"] == nil && hash["house_name"] == nil
+    puts "#{hash["house_number"]} #{hash["street_line_1"]}, \n#{hash["town_or_city"]}, \n#{hash["region"]}, \n#{hash["postcode"]}"
+  when hash["subpremise"] == nil && hash["house_number"] == nil && hash["street_line_2"] == nil && hash["region"] == nil
+    puts "#{hash["house_name"]}, \n#{hash["street_line_1"]}, \n#{hash["town_or_city"]}, \n#{hash["postcode"]}"
+  when hash["house_name"] == nil && hash["street_line_2"] == nil
+    puts "#{hash["subpremise"]}, \n#{hash["house_number"]} #{hash["street_line_1"]}, \n#{hash["town_or_city"]}, \n#{hash["region"]}, \n#{hash["postcode"]}"
+  when hash["street_line_2"] == nil && hash["region"] == nil
+    puts "#{hash["subpremise"]}, #{hash["house_name"]}, \n#{hash["house_number"]} #{hash["street_line_1"]}, \n#{hash["town_or_city"]}, \n#{hash["postcode"]}"
+  else
+    puts "#{hash["house_number"]}, \n#{hash["street_line_1"]}, \n#{hash["town_or_city"]}, \n#{hash["postcode"]}"
+  end
+end
 
-address(place_1).inspect
-address(place_2).inspect
-address(place_3).inspect
-address(place_4).inspect
+puts address(place_1).inspect
+puts address(place_2).inspect
+puts address(place_3).inspect
+puts address(place_4).inspect
